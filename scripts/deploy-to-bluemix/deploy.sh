@@ -64,7 +64,7 @@ done
 echo "Finished Istio Control Plane setup."
 sleep 5s
 
-echo "Current directory `pwd`"
+cd ..
 echo "installing initializer"
 echo
 kubectl apply -f ./addons/istio-initializer.yaml
