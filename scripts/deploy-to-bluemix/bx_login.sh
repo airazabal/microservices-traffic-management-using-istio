@@ -6,7 +6,8 @@ fi
 if [ -z $CF_SPACE ]; then
   CF_SPACE="$BLUEMIX_SPACE"
 fi
-
+ 
+echo "Bluemix org[$CF_ORG], bluemix space[$CF_SPACE]"
 
 if ([ -z "$BLUEMIX_USER" ] || [ -z "$BLUEMIX_PASSWORD" ] || [ -z "$BLUEMIX_ACCOUNT" ]) && ([ -z "$API_KEY"])
 then
@@ -16,6 +17,7 @@ fi
 echo "Deploy pods"
 
 echo "bx login -a $CF_TARGET_URL"
+echo "apikey[$API_KEY]"
 
 if [ -z "$API_KEY"]; then
   bx login -a "$CF_TARGET_URL" -u "$BLUEMIX_USER" -p "$BLUEMIX_PASSWORD" -c "$BLUEMIX_ACCOUNT" -o "$CF_ORG" -s "$CF_SPACE"
