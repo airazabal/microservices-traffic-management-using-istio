@@ -64,6 +64,24 @@ done
 echo "Finished Istio Control Plane setup."
 sleep 5s
 
+echo "installing initializer"
+echo
+kubectl apply -f ./addons/istio-initializer.yaml
+
+echo "finished installing initializer"
+
+PODS=$(kubectl get pods | grep istio | grep ContainerCreating)
+while [ ${#PODS} -ne 0 ]
+do
+    echo "Some Pods are still creating Containers..."
+    PODS=$(kubectl get pods | grep istio | grep ContainerCreating)
+    sleep 5s
+done
+
+PODS=$(kubectl get pods | grep istio)
+echo $PODS
+
+
 if [[ -z $MYSQL_DB_USER ]] && [[ -z $MYSQL_DB_PASSWORD ]] && [[ -z $MYSQL_DB_HOST ]] && [[ -z $MYSQL_DB_PORT ]]
 then
   echo "MYSQL_DB_USER,PASSWORD,HOST,PORT are not set. Going to be using MySQL in a container inside the cluster."
