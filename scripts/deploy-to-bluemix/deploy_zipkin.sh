@@ -1,0 +1,1 @@
+kubectl apply -f istio/install/kubernetes/addons/zipkin.yaml
